@@ -9,10 +9,13 @@
 <body>
 <header>
   <% if @user %>
-  <div>Welcome, <%= @user.first_name %></div>
-  <% else %>
+      <div>Welcome, <%= @user.first_name %></div>
+      <%= link_to("Logout", logout_path) %>
+<% else %>
+      <%= link_to("Login", login_path) %>
       <%= link_to("Register", new_user_path) %>
   <% end %>
+  <%= render partial: "shared/messages" %>
 </header>
 <%= yield %>
 

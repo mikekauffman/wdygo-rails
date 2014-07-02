@@ -1,0 +1,21 @@
+<h1>Login</h1>
+
+<%= form_tag login_path do %>
+    <div>
+      <fieldset>
+        <p>
+          <%= label_tag :email, 'Email' %>
+          <%= text_field_tag :email, params[:email], class: 'text_box_style', autofocus: 'autofocus' %>
+        </p>
+
+        <p>
+          <%= label_tag :password, 'Password', class: 'field_style' %>
+          <%= password_field_tag 'password', nil, class: 'text_box_style' %>
+        </p>
+
+        <div>
+          <%= submit_tag "Login", class: 'submit_button' %>
+        </div>
+      </fieldset>
+    </div>
+<% end %>

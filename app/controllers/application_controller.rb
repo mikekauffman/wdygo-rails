@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
 
   helper_method :current_user, :log_user_in
 
@@ -10,5 +8,9 @@ class ApplicationController < ActionController::Base
 
   def log_user_in(user)
     session[:id] = user.id
+  end
+
+  def log_user_out
+    session.destroy
   end
 end
