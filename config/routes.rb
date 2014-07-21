@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :users
-  get 'login' => 'sessions#new'
+  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy'
+  get '/logout' => 'sessions#destroy'
+  get '/auth/foursquare/callback' => 'users#update', as: 'user_oauth'
+  get '/users/:id/checkins' => 'checkins#index', as: 'user_checkins'
+  get '/users/:id/map' => 'checkins#map', as: 'user_map'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
