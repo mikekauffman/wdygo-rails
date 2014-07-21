@@ -19,7 +19,7 @@ feature 'Users join the site' do
     click_on 'Login'
     fill_in 'Email', with: 'goin2na@hotmail.com'
     fill_in 'Password', with: 'password'
-    click_on 'Login'
+    click_on 'Sign In'
     expect(page).to have_content 'Login Successful'
     expect(page).to have_content 'Welcome, Mike'
   end
@@ -30,14 +30,14 @@ feature 'Users join the site' do
     click_on 'Login'
     fill_in 'Email', with: 'goin2naples@hotmail.com'
     fill_in 'Password', with: 'password'
-    click_on 'Login'
+    click_on 'Sign In'
     expect(page).to have_content 'Invalid Email and Password Combination'
 
     visit root_path
     click_on 'Login'
     fill_in 'Email', with: 'goin2na@hotmail.com'
     fill_in 'Password', with: 'password123'
-    click_on 'Login'
+    click_on 'Sign In'
     expect(page).to have_content 'Invalid Email and Password Combination'
   end
 
@@ -47,7 +47,7 @@ feature 'Users join the site' do
     click_on 'Login'
     fill_in 'Email', with: 'goin2na@hotmail.com'
     fill_in 'Password', with: 'password'
-    click_on 'Login'
+    click_on 'Sign In'
     expect(page).to have_content 'Welcome, Mike'
     click_on 'Logout'
     expect(page).to have_content 'Logout Successful'
