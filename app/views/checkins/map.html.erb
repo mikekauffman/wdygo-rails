@@ -25,9 +25,9 @@
       titles.push("<%= checkin[:venue] %>");
       var contentString = '<div id="content">'+
               '<h1><a href="<%= checkin[:url] %>"><%= checkin[:venue] %></a></h1>'+
-              '<p><%= image_tag(checkin[:icon]) %></p>'+
+              '<%= image_tag(checkin[:icon]) %>'+
               '<h2><%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %> - <%= checkin[:time] %></h2>'+
-              '<p><%= checkin[:address] %></p>'+
+              '<p><%= checkin[:address] %> - <a href="https://maps.google.com/maps?daddr=<%= checkin[:address] %>&hl=en&sll=40.02931,-105.239977&sspn=0.154578,0.257149&t=h&gl=us&mra=ls&z=16">Get Directions<a></p>'+
               '</div>';
       infoWindows.push(contentString);
       <% end %>
