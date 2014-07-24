@@ -7,11 +7,10 @@ class Checkin
     end
   end
 
-
   def checkin_hash(checkin)
     h = {}
     date = checkin['createdAt']
-    h[:icon] = checkin['venue']['categories'][0]['icon']['prefix'] + '64' + checkin['venue']['categories'][0]['icon']['suffix']
+    h[:icon] = checkin['venue']['categories'][0]['icon']['prefix'] + '64' + checkin['venue']['categories'][0]['icon']['suffix'] if checkin['venue']['categories'][0]['icon']
     h[:day] = Time.at(date).to_datetime.strftime('%-d').to_i
     h[:month] = Time.at(date).to_datetime.strftime('%B')
     h[:year] = Time.at(date).to_datetime.strftime('%Y').to_i

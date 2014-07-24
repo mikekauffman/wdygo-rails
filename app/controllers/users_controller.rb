@@ -13,15 +13,22 @@ class UsersController < ApplicationController
   end
 
   def update
+    if current_user
     @user = current_user
     @user.foursquare_token = auth_hash[:credentials][:token]
     @user.save
-    p @user
     redirect_to user_path(@user)
+    else
+      redirect_to root_path
+    end
   end
 
   def show
-    @user = current_user
+    if current_user
+      @user = current_user
+    else
+      redirect_to root_path
+    end
   end
 
   private
