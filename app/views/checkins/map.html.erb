@@ -13,25 +13,69 @@
   </style>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDigiTGKOs8BUFxP6HqzXmum-F6WfXZGhQ&sensor=false"></script>
   <script>
+
+      var centered_city = new google.maps.LatLng(<%= @checkins_list.first[:latitude] %>, <%= @checkins_list.first[:longitude] %>);
+
+      var neighborhoods = [];
+      var titles = [];
+      var infoWindows = [];
+
+      <% @checkins_list.each do |checkin| %>
+      neighborhoods.push(new google.maps.LatLng(<%= checkin[:latitude] %>, <%= checkin[:longitude] %>));
+      titles.push("<%= checkin[:venue] %>");
+      var contentString = '<div id="content">'+
+              '<h1><%= checkin[:venue] %></h1>'+
+              '<h2><%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %></h2>'+
+              '<p><%= checkin[:address] %></p>'+
+              '</div>';
+      infoWindows.push(contentString);
+      <% end %>
+
+      var markers = [];
+      var iterator = 0;
+
+      console.log(neighborhoods);
+      console.log(titles);
+
+      var map;
+
       function initialize() {
-          var myLatlng = new google.maps.LatLng(<%= @checkins_list.first[:latitude] %>,<%= @checkins_list.first[:longitude] %>);
           var mapOptions = {
-              zoom: 7,
-              center: myLatlng
+              zoom: 8,
+              center: centered_city
           };
-          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-          new google.maps.Marker({
-              position: myLatlng,
+
+          map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+          drop();
+      }
+
+      function drop() {
+          for (var i = 0; i < neighborhoods.length; i++) {
+              setTimeout(function () {
+                  addMarker();
+              }, i * 30);
+          }
+      }
+
+      function addMarker() {
+          var marker = new google.maps.Marker({
+              position: neighborhoods[iterator],
               map: map,
-              title: "Hello World!"
+              title: titles[iterator],
+              draggable: false,
+              animation: google.maps.Animation.DROP
           });
-          <% @checkins_list.each do |checkin| %>
-          new google.maps.Marker({
-              position: new google.maps.LatLng(<%= checkin[:latitude] %>,<%= checkin[:longitude] %>),
-              map: map,
-              title: "<%= checkin[:venue] %>"
+          var infowindow = new google.maps.InfoWindow({
+              content: infoWindows[iterator],
           });
-          <% end %>
+          markers.push(marker);
+          google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(map,marker);
+          });
+          google.maps.event.addListener(map, 'click', function() {
+              infowindow.close();
+          });
+          iterator ++;
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);

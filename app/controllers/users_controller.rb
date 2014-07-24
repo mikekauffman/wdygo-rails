@@ -13,10 +13,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    response = JSON.parse(Faraday.get("https://foursquare.com/oauth2/access_token?client_id=#{ENV['CLIENT_ID']}&client_secret=#{ENV['CLIENT_SECRET']}&grant_type=authorization_code&redirect_uri=#{redirect_uri}&code=#{params[:code]}").body)
     @user = current_user
-    @user.foursquare_token = response["access_token"]
+    @user.foursquare_token = auth_hash[:credentials][:token]
     @user.save
+    p @user
     redirect_to user_path(@user)
   end
 
@@ -35,5 +35,9 @@ class UsersController < ApplicationController
 
   def allowed_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def auth_hash
+    request.env['omniauth.auth']
   end
 end

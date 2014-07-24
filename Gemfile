@@ -12,6 +12,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.17.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'dotenv-rails', '~> 0.11.1'
+gem 'omniauth-foursquare', :git => 'https://github.com/arunagw/omniauth-foursquare.git'
+
 
 group :production do
   gem 'rails_12factor', '~> 0.0.2'

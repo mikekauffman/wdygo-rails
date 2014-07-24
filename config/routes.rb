@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  get '/auth/foursquare/callback' => 'users#update', as: 'user_oauth'
+  get '/auth/:provider/callback' => 'users#update', as: 'user_oauth'
   get '/users/:id/checkins' => 'checkins#index', as: 'user_checkins'
   get '/users/:id/map' => 'checkins#map', as: 'user_map'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

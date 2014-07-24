@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
     uri = URI.parse(request.url)
     uri.path = '/auth/foursquare/callback'
     uri.query = nil
-    uri.to_s
+    uri
   end
 
 end
