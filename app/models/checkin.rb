@@ -7,16 +7,20 @@ class Checkin
     end
   end
 
+
   def checkin_hash(checkin)
     h = {}
     date = checkin['createdAt']
+    h[:icon] = checkin['venue']['categories'][0]['icon']['prefix'] + '64' + checkin['venue']['categories'][0]['icon']['suffix']
     h[:day] = Time.at(date).to_datetime.strftime('%-d').to_i
     h[:month] = Time.at(date).to_datetime.strftime('%B')
     h[:year] = Time.at(date).to_datetime.strftime('%Y').to_i
+    h[:time] = Time.at(date).to_datetime.strftime('%l:%M%p')
     h[:venue] = checkin['venue']['name']
     h[:address] = checkin['venue']['location']['formattedAddress'][0] && checkin['venue']['location']['formattedAddress'][1] ? checkin['venue']['location']['formattedAddress'][0] + " " + checkin['venue']['location']['formattedAddress'][1] : "No Address on Record"
     h[:latitude] = checkin['venue']['location']['lat']
     h[:longitude] = checkin['venue']['location']['lng']
+    h[:url] = checkin['venue']['url']
     h
   end
 end

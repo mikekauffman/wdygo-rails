@@ -24,8 +24,9 @@
       neighborhoods.push(new google.maps.LatLng(<%= checkin[:latitude] %>, <%= checkin[:longitude] %>));
       titles.push("<%= checkin[:venue] %>");
       var contentString = '<div id="content">'+
-              '<h1><%= checkin[:venue] %></h1>'+
-              '<h2><%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %></h2>'+
+              '<h1><a href="<%= checkin[:url] %>"><%= checkin[:venue] %></a></h1>'+
+              '<p><%= image_tag(checkin[:icon]) %></p>'+
+              '<h2><%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %> - <%= checkin[:time] %></h2>'+
               '<p><%= checkin[:address] %></p>'+
               '</div>';
       infoWindows.push(contentString);
@@ -34,14 +35,11 @@
       var markers = [];
       var iterator = 0;
 
-      console.log(neighborhoods);
-      console.log(titles);
-
       var map;
 
       function initialize() {
           var mapOptions = {
-              zoom: 8,
+              zoom: 10,
               center: centered_city
           };
 
@@ -66,7 +64,7 @@
               animation: google.maps.Animation.DROP
           });
           var infowindow = new google.maps.InfoWindow({
-              content: infoWindows[iterator],
+              content: infoWindows[iterator]
           });
           markers.push(marker);
           google.maps.event.addListener(marker, 'click', function() {
