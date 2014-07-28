@@ -15,13 +15,12 @@
   <script>
 
       var centered_city = new google.maps.LatLng(<%= @checkins_list.first[:latitude] %>, <%= @checkins_list.first[:longitude] %>);
-
-      var neighborhoods = [];
+      var checkins = [];
       var titles = [];
       var infoWindows = [];
 
       <% @checkins_list.each do |checkin| %>
-      neighborhoods.push(new google.maps.LatLng(<%= checkin[:latitude] %>, <%= checkin[:longitude] %>));
+      checkins.push(new google.maps.LatLng(<%= checkin[:latitude] %>, <%= checkin[:longitude] %>));
       titles.push("<%= checkin[:venue] %>");
       var contentString = '<div id="content">'+
               '<h1><a href="<%= checkin[:url] %>"><%= checkin[:venue] %></a></h1>'+
@@ -34,7 +33,6 @@
 
       var markers = [];
       var iterator = 0;
-
       var map;
 
       function initialize() {
@@ -42,13 +40,12 @@
               zoom: 10,
               center: centered_city
           };
-
           map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
           drop();
       }
 
       function drop() {
-          for (var i = 0; i < neighborhoods.length; i++) {
+          for (var i = 0; i < checkins.length; i++) {
               setTimeout(function () {
                   addMarker();
               }, i * 30);
@@ -57,7 +54,7 @@
 
       function addMarker() {
           var marker = new google.maps.Marker({
-              position: neighborhoods[iterator],
+              position: checkins[iterator],
               map: map,
               title: titles[iterator],
               draggable: false,
