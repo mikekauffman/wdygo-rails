@@ -81,3 +81,39 @@ $adrift: #0B486B;
     text-decoration: none;
   }
 }
+
+#list_content {
+  width: 98%;
+  min-height: 2em;
+  margin: .5em;
+  border: 1px solid black;
+  display: inline-block;
+  text-align: center;
+  tr {
+    width: 100%;
+  }
+  .odd {
+    color: $sail;
+    background-color: $sunlit_sea;
+  }
+  .even {
+    color: $sunlit_sea;
+    background-color: $green_sea;
+
+  }
+  td {
+    width: 15%;
+  }
+  a {
+    text-decoration: none;
+  }
+  h1 {
+    color: $adrift;
+  }
+  h2 {
+  }
+  a, h1, h2, p, {
+    margin: 0;
+    display: inline-block;
+  }
+}

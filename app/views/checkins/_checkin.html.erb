@@ -1,0 +1,16 @@
+<a href="<%= checkin[:url] %>" target="_blank">
+  <div id="list_content">
+    <div class="<%= cycle("odd", "even") %>">
+    <table>
+      <tr>
+        <td><h2><%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %> - <%= checkin[:time] %></h2></td>
+
+        <td><h1><%= checkin[:venue] %></h1></td>
+
+        <td><p><%= checkin[:address] %></p></td>
+
+      </tr>
+    </table>
+    </div>
+  </div>
+</a>

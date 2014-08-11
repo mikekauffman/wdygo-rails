@@ -1,10 +1,1 @@
-<ul>
-  <% @checkins_list.each do |checkin| %>
-      <li>
-        You checked in at <%= checkin[:venue] %> on <%= checkin[:month] %> <%= checkin[:day] %>, <%= checkin[:year] %>
-        <br>
-        Located at: <%= checkin[:address] %>
-      </li>
-      <br>
-  <% end %>
-</ul>
+<%= render partial: "checkin", collection: @checkins %>
